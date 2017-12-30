@@ -279,7 +279,7 @@ module.exports =
 
       editorSubscriptions.add editorLines, 'mousedown', (e) =>
         return unless @options.ctrlShiftClickEnabled
-        return unless e.which is 1 and e.shiftKey and (e.ctrlKey or e.metaKey)
+        return unless e.which is 1 and e.shiftKey and (e.ctrlKey or (process.platform == 'darwin' && e.metaKey))
         screenPos = editorElement.component.screenPositionForMouseEvent(e)
         editor.setCursorScreenPosition screenPos
         @gotoDefinition editor
