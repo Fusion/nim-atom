@@ -112,13 +112,13 @@ module.exports =
       nimExe: fixSystemPath(atom.config.get('nim.nimExecutablePath') or 'nim')
       nimSuggestEnabled: atom.config.get 'nim.nimsuggestEnabled'
       lintOnFly: atom.config.get 'nim.onTheFlyChecking'
-      nimLibPath: fixSystemPath(atom.config.get('nim.nimLibPath'))
+      nimLibPath: fixSystemPath(atom.config.get('nim.nimLibPath') or '')
 
     @runner = new Runner(() => @statusBarView)
     @projectManager = new ProjectManager()
     @executor = new Executor @projectManager, @options
     @checkForExes => 
-      require('atom-package-deps').install('nim', true)
+      require('atom-package-deps').install('nim2', true)
         .then => @activateAfterChecks(state)
         
   save: (editor, cb) ->
