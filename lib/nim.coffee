@@ -185,13 +185,13 @@ module.exports =
             @statusBarView?.showError("Nim build failed")
             cb("Build failed") if cb?
           else if extra.code != 0
-            @linterApi.setMessages(@linter, result)
+            @linterApi?.setMessages(@linter, result)
             @statusBarView?.showError("Nim build failed")
             # atom.notifications.addError "Build failed.",
             #   detail: "Project root: #{extra.filePath}"
             cb(false) if cb?
           else
-            @linterApi.setMessages(@linter, result)
+            @linterApi?.setMessages(@linter, result)
             @statusBarView?.showSuccess("Nim build succeeded")
             # atom.notifications.addSuccess "Build succeeded.",
             #   detail: "Project root: #{extra.filePath}"
