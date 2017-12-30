@@ -1,19 +1,19 @@
 {
-  "name": "nim",
-  "version": "0.3.6",
+  "name": "nim2",
+  "version": "0.4.0",
   "license": "MIT",
-  "description": "Nim for Atom with autocomplete, error checking, and jump-to-definition",
-  "homepage": "https://github.com/russpowers/nim-atom",
+  "description": "Nim for Atom with autocomplete, error checking, and jump-to-definition. Forked from nim-atom.",
+  "homepage": "https://github.com/fusion/nim-atom",
   "main": "./lib/nim",
   "engines": {
     "atom": ">=0.199.0 <2.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/russpowers/nim-atom"
+    "url": "https://github.com/fusion/nim-atom"
   },
   "bugs": {
-    "url": "https://github.com/russpowers/nim-atom/issues"
+    "url": "https://github.com/fusion/nim-atom/issues"
   },
   "providedServices": {
     "autocomplete.provider": {

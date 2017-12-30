@@ -54,7 +54,7 @@ module.exports =
       Note that it executes the command as a child process, which doesn't have a terminal window unless you open one explicity in the command.  Examples (type the correct one into the box below):<br/><br/>
       <b>No terminal window, any platform:</b> <code>&lt;bin&gt;</code><br/>
       <b>Windows w/ terminal:</b> <code>start &lt;bin&gt;</code><br/>
-      <b>OSX w/ terminal:</b> <code>open -a Terminal "&#96;&lt;bin&gt;&#96;"</code><br/> 
+      <b>OSX w/ terminal:</b> <code>osascript -e 'tell application "Terminal"' -e 'if not (exists window 1) then reopen' -e 'activate' -e 'do script "&lt;bin&gt;" in window 1' -e 'end tell'</code><br/>
       <b>Linux w/ terminal (gnome):</b> <code>gnome-terminal -e "&lt;bin&gt;"</code><br/>
       """
     order: 9
