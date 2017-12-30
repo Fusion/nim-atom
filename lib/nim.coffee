@@ -108,11 +108,11 @@ module.exports =
 
   activate: (state) ->
     @options =
-      nimSuggestExe: fixSystemPath(atom.config.get('nim.nimsuggestExecutablePath') or 'nimsuggest')
-      nimExe: fixSystemPath(atom.config.get('nim.nimExecutablePath') or 'nim')
-      nimSuggestEnabled: atom.config.get 'nim.nimsuggestEnabled'
-      lintOnFly: atom.config.get 'nim.onTheFlyChecking'
-      nimLibPath: fixSystemPath(atom.config.get('nim.nimLibPath') or '')
+      nimSuggestExe: fixSystemPath(atom.config.get('nim2.nimsuggestExecutablePath') or 'nimsuggest')
+      nimExe: fixSystemPath(atom.config.get('nim2.nimExecutablePath') or 'nim')
+      nimSuggestEnabled: atom.config.get 'nim2.nimsuggestEnabled'
+      lintOnFly: atom.config.get 'nim2.onTheFlyChecking'
+      nimLibPath: fixSystemPath(atom.config.get('nim2.nimLibPath') or '')
 
     @runner = new Runner(() => @statusBarView)
     @projectManager = new ProjectManager()
@@ -155,7 +155,7 @@ module.exports =
         navigateToFile data.path, data.line, data.col, editor
 
   run: (editor, cb) ->
-    runCmd = atom.config.get 'nim.runCommand'
+    runCmd = atom.config.get 'nim2.runCommand'
     if runCmd == ''
       return atom.notifications.addError "Run Command not specified, please check nim package settings"
 
@@ -198,7 +198,7 @@ module.exports =
             #   dismissable: true
             cb(true) if cb?
 
-      abb = atom.config.get 'nim.autosaveBeforeBuild'
+      abb = atom.config.get 'nim2.autosaveBeforeBuild'
 
       if abb == 'Save all files'
         @saveAllModified afterSaves
@@ -232,31 +232,31 @@ module.exports =
       @checkForExes => @updateProjectManager()
 
     @subscriptions = new SubAtom()
-    @subscriptions.add atom.config.onDidChange 'nim.nimExecutablePath', (path) =>
+    @subscriptions.add atom.config.onDidChange 'nim2.nimExecutablePath', (path) =>
       @options.nimExe = fixSystemPath(path.newValue or 'nim')
       updateProjectManagerDebounced()
 
-    @subscriptions.add atom.config.onDidChange 'nim.nimsuggestExecutablePath', (path) =>
+    @subscriptions.add atom.config.onDidChange 'nim2.nimsuggestExecutablePath', (path) =>
       @options.nimSuggestExe = fixSystemPath(path.newValue or 'nimsuggest')
-      nsen = atom.config.get 'nim.nimsuggestEnabled'
+      nsen = atom.config.get 'nim2.nimsuggestEnabled'
       if path.newValue == ''
-        atom.config.set('nim.nimsuggestEnabled', false) if nsen
+        atom.config.set('nim2.nimsuggestEnabled', false) if nsen
       else
-        atom.config.set('nim.nimsuggestEnabled', true) if not nsen
+        atom.config.set('nim2.nimsuggestEnabled', true) if not nsen
       updateProjectManagerDebounced()
 
-    @subscriptions.add atom.config.onDidChange 'nim.nimsuggestEnabled', (enabled) =>
+    @subscriptions.add atom.config.onDidChange 'nim2.nimsuggestEnabled', (enabled) =>
       @options.nimSuggestEnabled = enabled.newValue
       updateProjectManagerDebounced()
 
-    @subscriptions.add atom.config.onDidChange 'nim.nimLibPath', (path) =>
+    @subscriptions.add atom.config.onDidChange 'nim2.nimLibPath', (path) =>
       @options.nimLibPath = fixSystemPath path.newValue
       updateProjectManagerDebounced()
 
-    @subscriptions.add atom.config.observe 'nim.useCtrlShiftClickToJumpToDefinition', (enabled) =>
+    @subscriptions.add atom.config.observe 'nim2.useCtrlShiftClickToJumpToDefinition', (enabled) =>
       @options.ctrlShiftClickEnabled = enabled
 
-    @subscriptions.add atom.config.observe 'nim.autocomplete', (value) =>
+    @subscriptions.add atom.config.observe 'nim2.autocomplete', (value) =>
       @options.autocomplete = if value == 'Always'
         AutoCompleteOptions.ALWAYS
       else if value == 'Only after dot'
@@ -278,8 +278,8 @@ module.exports =
       editorLines = editorElement.shadowRoot.querySelector '.lines'
 
       editorSubscriptions.add editorLines, 'mousedown', (e) =>
-        return unless @options.ctrlShiftClickEnabled 
-        return unless e.which is 1 and e.shiftKey and e.ctrlKey
+        return unless @options.ctrlShiftClickEnabled
+        return unless e.which is 1 and e.shiftKey and (e.ctrlKey or e.metaKey)
         screenPos = editorElement.component.screenPositionForMouseEvent(e)
         editor.setCursorScreenPosition screenPos
         @gotoDefinition editor
