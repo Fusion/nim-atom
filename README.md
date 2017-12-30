@@ -1,6 +1,18 @@
-# Nim for Atom
+# Nim2 for Atom
 
 This is an Atom package for the Nim language that integrates with the Nim compiler and Nimsuggest.
+
+I forked it from [Russ Power's](https://github.com/russpowers/nim-atom) repository. The last observed activity on that repository seems to be 2 years ago and the package had stopped working with recent versions of Atom.
+
+I can barely write Coffeescript code, so the ideal scenario would be for Russ to revive his version. In the meantime, you're stuck with this one!
+
+What I have done so far:
+
+* Made the features described below work again
+* Improved MacOS compatibility
+* Updated README.md with more modern directions
+
+If you wish to submit a **pull request**, please do so [here](https://github.com/Fusion/nim-atom/pulls).
 
 ## Features:
 * Autocomplete
@@ -9,20 +21,26 @@ This is an Atom package for the Nim language that integrates with the Nim compil
 * Syntax highlighting
 
 ## Installation
+1. I recommend installing Nim, Nimble and Nimsuggest using [choosenim](https://github.com/dom96/choosenim). It's modern and it works.
+   The resulting files will be available in `~/.nimble/bin/`
+
+Or you could
+
 1. [Install Nim](http://nim-lang.org/download.html) or [build Nim from source](https://github.com/nim-lang/Nim)
 2. [Install Nimble](https://github.com/nim-lang/nimble) (optional, needed for Nimsuggest)
 3. [Install Nimsuggest](https://github.com/nim-lang/nimsuggest) (optional, highly recommended, improves autocomplete and jump-to-definition performance)
-4. Install this package in Atom: `File` -> `Settings` (or `Edit` -> `Preferences`) -> `Install`, then search for `nim`
+
+And finally, install this package in Atom: `File` -> `Settings` (or `Edit` -> `Preferences` or `Atom` -> `Preferences`) -> `Install`, then search for `nim2`
 
 ## Configuration
-1. Go to the package settings in Atom: `File` -> `Settings` (or `Edit` -> `Preferences`) -> `Packages` -> `nim`
+1. Go to the package settings in Atom: `File` -> `Settings` (or `Edit` -> `Preferences` or `Atom` -> `Preferences`) -> `Packages` -> `nim2`
 2. If `nim` and/or `nimsuggest` are not in your PATH, then set the paths for them.
 3. (Optional) Set up the `Run Command` for your OS (at the bottom of the nim package settings, see instructions there).
 
 ## Important input
-1. `Ctrl`-`Shift`-Click -> Jump to definition under cursor
-2. `Ctrl`-`Shift`-B -> Build current file or the project it belongs to
-2. `F5` -> Build and Run current file or the project it belongs to
+1. `Ctrl` + `Shift` + Click or `Command` + `Shift` + Click -> Jump to definition under cursor
+2. `Ctrl` + `Shift` + B or `Command` + `Shift` + B -> Build current file or the project it belongs to
+3. `F5` -> Build and Run current file or the project it belongs to
 
 ## How Projects Work
 Use `File` -> `Open Folder` to open the root folder for a Nim project.  You should have a main project `.nim` file, which is autodetected using the following steps:
@@ -43,17 +61,17 @@ Note that if you have a main project file, error checking only occurs for files 
 If there are a lot of errors/warnings when linting, Atom will slow down a lot.  This is because it creates every error/warning box instead of reusing them.  There is a pending issue for this in the Atom Linter package.
 
 ## Jump To Definition
-Use Ctrl + Shift + Left Click to jump to the definition under the mouse cursor.
+Use `Ctrl` + `Shift` + Left Click or, on MacOS, `Command` + `Shift` + Left Click to jump to the definition under the mouse cursor.
 
 ## Build and Run
-Use `Ctrl`-`Shift`-B to build, which compiles the current file or its project.  If there are errors, they will show up normally.  These may be different that the linting errors (and probably are more accurate).  The status bar in the lower right will show if it was successful or failed.
+Use `Ctrl` + `Shift` + B or, on MacOS, `Command` + `Shift` + B to build, which compiles the current file or its project.  If there are errors, they will show up normally.  These may be different that the linting errors (and probably are more accurate).  The status bar in the lower right will show if it was successful or failed.
 
 Use `F5` to build and run the current file or its project.  If the build fails, it will not try to run anything.  Be sure you set up the `Run Command` first!
 
 These commands can work on individual files or projects.  If you are editing a file that's not in a project, these commands will just build/run that file.  If it is part of a project, these commands will build/run the project root file.
 
 ## Notes
-Sometimes the nim compiler or nimsuggest crashes, and you'll see the error notification.  It's not a big deal, and nimsuggest will auto-restart.  You can view full error dumps in the developer tools console (`Ctrl`-`Alt`-`i` or `Ctrl`-`Shift`-`i`).  This can be annoying when doing on-the-fly error checking, so it is disabled by default.
+Sometimes the nim compiler or nimsuggest crashes, and you'll see the error notification.  It's not a big deal, and nimsuggest will auto-restart.  You can view full error dumps in the developer tools console (`Ctrl` + `Alt` + i or `Ctrl` + `Shift` + i or `Command` + `Shift` + i).  This can be annoying when doing on-the-fly error checking, so it is disabled by default.
 
 ## Development
 If you want to hack on this package, just:
@@ -68,4 +86,6 @@ Now you can edit the source directly in your repo clone and it will update any t
 
 ## Credit
 
-This originally started as a fork of https://github.com/zah/nim.atom/, but it has changed so much that I just created a new project.
+This originally started as a fork of https://github.com/zah/nim.atom/, but it has changed so much that I just Russ Power a new project.
+
+Then, the new project stopped working and I created yet another new one.
