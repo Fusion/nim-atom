@@ -2,7 +2,7 @@
   "name": "nim2",
   "version": "0.4.0",
   "license": "MIT",
-  "description": "Nim for Atom with autocomplete, error checking, and jump-to-definition",
+  "description": "Nim for Atom with autocomplete, error checking, and jump-to-definition. Forked from nim-atom.",
   "homepage": "https://github.com/fusion/nim-atom",
   "main": "./lib/nim",
   "engines": {
