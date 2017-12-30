@@ -126,7 +126,13 @@ module.exports =
       disposable = editor.buffer.onDidSave ->
         disposable.dispose()
         cb()
-      editor.save()
+      # While the code above seems to indicate that we should deal nicely
+      # with async. save, it appears that save() could be invoked
+      # multiple times (for each document) so this way we are queuing
+      # saves as we did before.
+      # Not sure whether necessary, but out of paranioa let's avoid
+      # ambiguous behaviors.
+      await editor.save()
     else
       cb()
 
